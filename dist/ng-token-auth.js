@@ -394,6 +394,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
                 opts = {};
               }
               if (!this.tokenHasExpired()) {
+                console.log("here in ng-token-auth");
                 return $http.get(this.apiUrl(opts.config) + this.getConfig(opts.config).tokenValidationPath).success((function(_this) {
                   return function(resp) {
                     var authData;
@@ -403,7 +404,9 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
                       $rootScope.$broadcast('auth:email-confirmation-success', _this.user);
                     }
                     if (_this.mustResetPassword) {
+                      console.log("before broadcast in ng-token-auth");
                       $rootScope.$broadcast('auth:password-reset-confirm-success', _this.user);
+                      console.log("after broadcast in ng-token-auth");
                     }
                     return $rootScope.$broadcast('auth:validation-success', _this.user);
                   };
